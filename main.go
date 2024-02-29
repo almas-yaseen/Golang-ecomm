@@ -3,6 +3,8 @@ package main
 import (
 	"ginapp/config"
 	"ginapp/database"
+	routes "ginapp/router"
+
 	"log"
 
 	"github.com/gin-gonic/gin"
@@ -20,15 +22,11 @@ func main() {
 
 	if err != nil {
 
-		log.Fatalf("error connecting to the database", err)
+		log.Fatalf("error connecting to the database %v", err)
 	}
 
 	router := gin.Default()
-	userGroup := router.Group("/")
-	userGroup.GET("/user", func(c *gin.Context) {
-		c.JSON(200, gin.H{"message": "User route"})
-	})
-
+	routes.UserRoutes(router.Group("/"), db)
 	err = router.Run("localhost:8080")
 	if err != nil {
 		log.Fatalf("localhost error %v", err)

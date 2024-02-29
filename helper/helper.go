@@ -2,6 +2,7 @@ package helper
 
 import (
 	"errors"
+	"fmt"
 	"ginapp/config"
 	"ginapp/models"
 	"time"
@@ -44,9 +45,11 @@ func GenerateTokenUsers(userID int, userEmail string, expirationTime time.Time) 
 		},
 	}
 
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	tokenString, err := token.SignedString([]byte(cfg.KEY))
+	fmt.Println("here is the token string", tokenString)
+	fmt.Println("here is the error come here ", err)
 
 	if err != nil {
 		return "", err
@@ -55,6 +58,7 @@ func GenerateTokenUsers(userID int, userEmail string, expirationTime time.Time) 
 }
 
 func GenerateAccessToken(user models.SignupDetailResponse) (string, error) {
+	fmt.Println("here user is ", user)
 
 	expirationTime := time.Now().Add(15 * time.Minute)
 	tokenString, err := GenerateTokenUsers(user.ID, user.Email, expirationTime)
