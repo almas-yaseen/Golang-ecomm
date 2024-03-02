@@ -8,17 +8,20 @@ import (
 )
 
 type Config struct {
-	BASE_URL   string `mapstructure:"BASE_URL"`
-	DBHost     string `mapstructure:"DB_HOST"`
-	DBName     string `mapstructure:"DB_NAME"`
-	DBUser     string `mapstructure:"DB_USER"`
-	DBPort     string `mapstructure:"DB_PORT"`
-	DBPassword string `mapstructure:"DB_PASSWORD"`
-	KEY        string `mapstructure:"KEY"`
+	BASE_URL    string `mapstructure:"BASE_URL"`
+	DBHost      string `mapstructure:"DB_HOST"`
+	DBName      string `mapstructure:"DB_NAME"`
+	DBUser      string `mapstructure:"DB_USER"`
+	DBPort      string `mapstructure:"DB_PORT"`
+	DBPassword  string `mapstructure:"DB_PASSWORD"`
+	KEY         string `mapstructure:"KEY"`
+	AUTHTOKEN   string `mapstructure:"TWILIO_AUTHTOKEN"`
+	ACCOUNTSID  string `mapstructure:"TWILIO_ACCOUNTSID"`
+	SERVICESSID string `mapstructure:"TWILIO_SERVICESID"`
 }
 
 var envs = []string{
-	"BASE_URL", "DB_HOST", "DB_NAME", "DB_USER", "DB_PORT", "DB_PASSWORD"}
+	"BASE_URL", "DB_HOST", "DB_NAME", "DB_USER", "DB_PORT", "DB_PASSWORD", "TWILIO_AUTHTOKEN", "TWILIO_ACCOUNTSID", "TWILIO_SERVICESID"}
 
 func LoadConfig() (Config, error) {
 

@@ -36,6 +36,7 @@ require (
 	github.com/go-playground/validator/v10 v10.18.0 // indirect
 	github.com/go-swagger/go-swagger v0.30.5 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
+	github.com/golang/mock v1.6.0 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/handlers v1.5.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -77,6 +78,7 @@ require (
 	github.com/swaggo/http-swagger v1.3.4 // indirect
 	github.com/swaggo/swag v1.16.3 // indirect
 	github.com/toqueteos/webbrowser v1.2.0 // indirect
+	github.com/twilio/twilio-go v1.19.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	github.com/urfave/cli/v2 v2.27.1 // indirect

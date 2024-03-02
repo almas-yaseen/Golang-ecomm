@@ -66,3 +66,18 @@ func FindUserDetailByEmail(user models.UserLogin) (models.UserLoginResponse, err
 
 	return UserDetails, nil
 }
+
+func FindUserByMobileNumber(phone string) (*domain.User, error) {
+	var User domain.User
+	result := database.DB.Where(&domain.User{Phone: phone}).First(&User)
+
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, nil
+		}
+		return nil, result.Error
+
+	}
+	return &User, nil
+
+}
