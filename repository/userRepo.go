@@ -81,3 +81,26 @@ func FindUserByMobileNumber(phone string) (*domain.User, error) {
 	return &User, nil
 
 }
+
+func CheckAddress(userid int) error {
+
+	var address models.AddressInfo
+
+	err := database.DB.Raw("select * from addresses where user_id=?", userid).Scan(&address).Error
+	if err != nil {
+		return err
+	}
+
+	return err
+
+}
+
+func AddAddress(userId int, address models.AddressInfo) error {
+
+	if err := database.DB.Raw("insert into addresses(user_id,name,house_name,street,city,state,pin) values(?,?,?,?,?,?,?)", userId, address.Name, address.HouseName, address.Street, address.City, address.State, address.Pin).Scan(&address).Error; err != nil {
+
+		return err
+
+	}
+	return nil
+}

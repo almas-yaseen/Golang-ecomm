@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"errors"
+	"fmt"
 	"ginapp/models"
 	response "ginapp/reponse"
 	"ginapp/usecase"
@@ -81,5 +82,37 @@ func UserLoginWithPassword(c *gin.Context) {
 	successres := response.ClientResponse(http.StatusCreated, "succesed login user", LogedUser, nil)
 
 	c.JSON(http.StatusOK, successres)
+}
 
+func AddAddress(c *gin.Context) {
+
+	fmt.Println("Hey from")
+
+	user_id, _ := c.Get(models.User_id)
+
+	var address models.AddressInfo
+	if err := c.ShouldBindJSON(&address); err != nil {
+		errRes := response.ClientResponse(http.StatusBadRequest, "fields are provided in wrong format", nil, err.Error())
+		c.JSON(http.StatusBadRequest, errRes)
+		return
+
+	}
+
+	err := validator.New().Struct(address)
+
+	if err != nil {
+		errRes := response.ClientResponse(http.StatusBadRequest, "Constraints does not match", nil, err.Error())
+		c.JSON(http.StatusBadRequest, errRes)
+		return
+
+	}
+	if err := usecase.Addaddress(user_id.(int), address); err != nil {
+		errRes := response.ClientResponse(http.StatusBadRequest, "error from adding address", nil, err.Error())
+		c.JSON(http.StatusBadGateway, errRes)
+		return
+
+	}
+
+	successRes := response.SuccessClientResponse(http.StatusOK, "added address successfully")
+	c.JSON(http.StatusOK, successRes)
 }

@@ -143,3 +143,18 @@ func UserLogged(user models.UserLogin) (*models.TokenUser, error) {
 	}, nil
 
 }
+
+func Addaddress(UserId int, address models.AddressInfo) error {
+
+	err := repository.CheckAddress(UserId)
+
+	if err != nil {
+		return err
+	}
+
+	if err := repository.AddAddress(UserId, address); err != nil {
+		return err
+	}
+
+	return nil
+}
